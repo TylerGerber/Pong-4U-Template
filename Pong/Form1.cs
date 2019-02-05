@@ -144,9 +144,12 @@ namespace Pong
             p2.Y = this.Height / 2 - p2.Height / 2;
 
             // TODO set Width and Height of ball
+            ball.Width = 5;
+            ball.Height = 5;
             // TODO set starting X position for ball to middle of screen, (use this.Width and ball.Width)
+            ball.X = this.Width/2;
             // TODO set starting Y position for ball to middle of screen, (use this.Height and ball.Height)
-
+             ball.Y = this.Width/2;
         }
 
         /// <summary>
@@ -162,7 +165,17 @@ namespace Pong
             // TODO create code move ball either down or up based on ballMoveDown and using BALL_SPEED
 
             #endregion
+            if (ballMoveRight = true)
+            {
+                ball.X = ball.X + BALL_SPEED;
+            }
+            else
+            {
+                ball.X = ball.X - BALL_SPEED;
+            }
 
+
+            
             #region update paddle positions
 
             if (aKeyDown == true && p1.Y > 0)
@@ -177,6 +190,40 @@ namespace Pong
             // TODO create an if statement and code to move player 2 paddle down using p2.Y and PADDLE_SPEED
 
             #endregion
+            if(zKeyDown == true)
+            {
+                p1.Y += 5;
+            }
+            if(zKeyDown == false)
+            {
+                p1.Y += 0;
+            }
+
+            if (aKeyDown == true)
+            {
+                p1.Y -= 5;
+            }
+            if(aKeyDown == false)
+            {
+                p1.Y += 0;
+            }
+            if (mKeyDown == true)
+            {
+                p2.Y += 5;
+            }
+            if(mKeyDown == false)
+            {
+                p2.Y += 0;
+            }
+
+            if (jKeyDown == true)
+            {
+                p2.Y -= 5;
+            }
+            if(jKeyDown == false)
+            {
+                p2.Y += 0;
+            }
 
             #region ball collision with top and bottom lines
 
@@ -247,11 +294,17 @@ namespace Pong
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.FillEllipse(drawBrush, ball);
             // TODO draw paddles using FillRectangle
-
+            e.Graphics.FillRectangle(drawBrush, p1);
             // TODO draw ball using FillRectangle
-
+            e.Graphics.FillRectangle(drawBrush, p2);
             // TODO draw scores to the screen using DrawString
+            e.Graphics.DrawString("player one score", drawFont, drawBrush, 34, 25);
+            e.Graphics.DrawString(player1Score.ToString(), drawFont, drawBrush, 34, 40);
+
+            e.Graphics.DrawString("player two score", drawFont, drawBrush, this.Width -150, 25);
+            e.Graphics.DrawString(player2Score.ToString(), drawFont, drawBrush, this.Width - 150, 40);
         }
 
     }

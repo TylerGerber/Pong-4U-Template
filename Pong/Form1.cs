@@ -159,14 +159,7 @@ namespace Pong
         private void gameUpdateLoop_Tick(object sender, EventArgs e)
         {
             #region update ball position
-
-            // TODO create code to move ball either left or right based on ballMoveRight and using BALL_SPEED
-
-            // TODO create code move ball either down or up based on ballMoveDown and using BALL_SPEED
-
-            #endregion
-            
-            if (ballMoveRight)
+   if (ballMoveRight)
             {
                 ball.X = ball.X - BALL_SPEED;
             }
@@ -185,6 +178,13 @@ namespace Pong
             {
                 ball.Y = ball.Y + BALL_SPEED;
             }
+            // TODO create code to move ball either left or right based on ballMoveRight and using BALL_SPEED
+
+            // TODO create code move ball either down or up based on ballMoveDown and using BALL_SPEED
+
+            #endregion
+            
+         
 
             
          
@@ -289,19 +289,57 @@ namespace Pong
 
             if (ball.X < 0)  // ball hits left wall logic
             {
-                // TODO
+                // TOD0
                 // --- play score sound
                 // --- update player 2 score
+                player2Score += 1;
+
+                ball.X = this.Width / 2;
+                ball.Y = this.Width / 2;
+                System.Threading.Thread.Sleep(1000);
+
+
+
 
                 // TODO use if statement to check to see if player 2 has won the game. If true run 
                 // GameOver method. Else change direction of ball and call SetParameters method.
+                if (player2Score == 3)
+                {
+                                        
+                }
+                
+            }
+
+            if (ball.X > 625)  // ball hits right wall logic
+            {
+                // TOD0
+                // --- play score sound
+                // --- update player 2 score
+                player1Score += 1;
+
+                ball.X = this.Width / 2;
+                ball.Y = this.Width / 2;
+                System.Threading.Thread.Sleep(1000);
+
+
+
+
+                // TODO use if statement to check to see if player 2 has won the game. If true run 
+                // GameOver method. Else change direction of ball and call SetParameters method.
+                if (player2Score == 3)
+                {
+                    
+
+                }
 
             }
+
+
 
             // TODO same as above but this time check for collision with the right wall
 
             #endregion
-            
+
             //refresh the screen, which causes the Form1_Paint method to run
             this.Refresh();
         }
@@ -311,12 +349,13 @@ namespace Pong
         /// to play again or end the program
         /// </summary>
         /// <param name="winner">The player name to be shown as the winner</param>
-        private void GameOver(string winner)
+        public void GameOver(string winner)
         {
             newGameOk = true;
 
             // TODO create game over logic
             // --- stop the gameUpdateLoop
+            gameUpdateLoop.Stop();
             // --- show a message on the startLabel to indicate a winner, (need to Refresh).
             // --- pause for two seconds 
             // --- use the startLabel to ask the user if they want to play again
